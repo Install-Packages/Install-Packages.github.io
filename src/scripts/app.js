@@ -26,6 +26,24 @@ app.controller('mainCtrl',['$scope','$http', function($scope,$http) {
     
 }])
 
+app.directive('copyToClipboard', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
+            elem.click(function () {
+                if (attrs.copyToClipboard) {
+                    var $temp_input = $("<input>");
+                    $("body").append($temp_input);
+                    $temp_input.val(attrs.copyToClipboard).select();
+                    document.execCommand("copy");
+                    $temp_input.remove();
+                    
+                }
+            });
+        }
+    };
+});
+
 
 app.controller('homeCtrl',['$scope','$http', function($scope,$http){
 
@@ -36,6 +54,7 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
     $scope.versions = [];
     $scope.version = null;
     $scope.installData = [];
+    $scope.cmdLines = [];
     
     $scope.getOs = ()=>{
         $http.get("./data/os.json").then(function(response) {
@@ -71,10 +90,12 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
                 $scope.versions.forEach((e) => {
                     if(e.version == $scope.version){
                         $scope.installData = e;
+                        $scope.cmdLines = e.cmd.split("<br>")
                     }
                 })
             }
         })
     }
+
 
 }]);

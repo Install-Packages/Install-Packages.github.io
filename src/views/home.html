@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="os">Select OS</label>
+                <label for="os">Select Your OS</label>
                 <select ui-select2 data-placeholder="Select OS" name="os" id="os" ng-model="os" ng-change="selectOs()" class="form-control">
                     <option value=""></option>
                     <option ng-repeat="os in oss" value="{{ os.name }}">{{ os.name }}</option>
@@ -23,7 +23,7 @@
                 <label for="os">Select Version</label>
                 <select ui-select2 data-placeholder="Select Version" name="versions" id="versions" ng-model="version" ng-change="selectVersion()" class="form-control">
                     <option value=""></option>
-                    <option ng-repeat="version in versions" value="{{version.version}}">{{ version.version }}</option>
+                    <option ng-repeat="v in versions" value="{{v.version}}">{{ v.version }}</option>
                 </select>
             </div>
         </div>
@@ -33,7 +33,7 @@
             How to install {{ module }} in {{ os }}?
         </div>
         <div class="panel-body">
-            <pre><div ng-bind-html="installData.cmd"></div></pre>
+            <pre ng-repeat="line in cmdLines"><div ng-bind-html="line"></div> <button class="pull-right btn btn-sm copy-btn btn-success" copy-to-clipboard="{{ line }}">Copy</button></pre>
         </div>
     </div>
 </div>

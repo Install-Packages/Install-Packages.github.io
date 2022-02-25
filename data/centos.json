@@ -1,0 +1,11 @@
+[
+    {
+        "name" : "NodeJs",
+        "versions" : [
+            {
+                "version" : "12",
+                "cmd" : "dnf module install nodejs:<stream><br>dnf module list nodejs<br>dnf module install nodejs:12"
+            }
+        ]    
+    }
+]
