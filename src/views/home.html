@@ -1,0 +1,39 @@
+<div ng-init="getOs()" class="form-group">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="os">Select OS</label>
+                <select ui-select2 data-placeholder="Select OS" name="os" id="os" ng-model="os" ng-change="selectOs()" class="form-control">
+                    <option value=""></option>
+                    <option ng-repeat="os in oss" value="{{ os.name }}">{{ os.name }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="os">Select Module</label>
+                <select ui-select2 data-placeholder="Select Module" name="modules" id="modules" ng-model="module" ng-change="selectModule()" class="form-control">
+                    <option value=""></option>
+                    <option ng-repeat="module in modules" value="{{ module.name }}">{{ module.name }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="from-group">
+                <label for="os">Select Version</label>
+                <select ui-select2 data-placeholder="Select Version" name="versions" id="versions" ng-model="version" ng-change="selectVersion()" class="form-control">
+                    <option value=""></option>
+                    <option ng-repeat="version in versions" value="{{version.version}}">{{ version.version }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary" ng-if="installData.cmd" >
+        <div class="panel-heading">
+            How to install {{ module }} in {{ os }}?
+        </div>
+        <div class="panel-body">
+            <pre><div ng-bind-html="installData.cmd"></div></pre>
+        </div>
+    </div>
+</div>
