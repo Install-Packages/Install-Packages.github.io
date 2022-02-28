@@ -32,11 +32,17 @@ app.directive('copyToClipboard', function () {
         link: function (scope, elem, attrs) {
             elem.click(function () {
                 if (attrs.copyToClipboard) {
+                    
                     var $temp_input = $("<input>");
                     $("body").append($temp_input);
-                    $temp_input.val(attrs.copyToClipboard).select();
+                    var texts = attrs.copyToClipboard.split("//");
+                    $temp_input.val(texts[0]).select();
                     document.execCommand("copy");
                     $temp_input.remove();
+                    elem.text("Copied")
+                    setTimeout(function () {
+                        elem.text("Copy")
+                    },2000)
                     
                 }
             });
@@ -96,6 +102,7 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
             }
         })
     }
+    
 
 
 }]);
