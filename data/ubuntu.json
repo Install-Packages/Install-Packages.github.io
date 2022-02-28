@@ -105,12 +105,9 @@
                 "version" : "Ubuntu 16.04",
                 "cmd" : "sudo apt-get update -y<br>sudo apt install apache2 // install apache 2<br>sudo systemctl restart apache2 // restart apache server<br>sudo ufw app list // adjust your firewall settings to allow HTTP traffic<br>sudo ufw allow in \"Apache\"<br>sudo ufw status // check status<br>sudo apt install mysql-server // install mysql database<br>sudo mysql_secure_installation // set user and password<br>sudo mysql // enter into database to verify<br>exit // exit from database<br>sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql // install latest php and php-ext<br>php -v // verify php version"
             },{
-                "version" : "Ubuntu 16.04",
+                "version" : "Ubuntu 14.04",
                 "cmd" : " sudo apt-get update -y<br>sudo apt install apache2 // install apache 2<br>sudo apt-get install mysql-server php5-mysql // install mysql database<br>sudo mysql_secure_installation // set user and password<br>sudo mysql // enter into database to verify<br>exit // exit from database<brsudo apt-get install php5 libapache2-mod-php5 php5-mcrypt // install latest php and php-ext<br>php -v // verify php version"
             }
-
-
-           
             
         ]    
     }

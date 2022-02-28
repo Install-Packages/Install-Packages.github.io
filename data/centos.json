@@ -19,6 +19,15 @@
                 "cmd" : "sudo yum install httpd // install httpd<br>sudo systemctl enable httpd.service //enable httpd<<br>sudo yum install mariadb-server mariadb //Installing MariaDB<br>sudo systemctl start mariadb //start MariaDB<br>sudo mysql_secure_installation // set user and password<br>sudo mysql // login to database<br>exit //exit from database<br>sudo yum install php php-mysql //Installing PHP"
             }
         ]    
+    },{
+        "name" : "Git",
+        "versions" : [
+            {
+                "version" : "latest",
+                "cmd" : "sudo yum install git<br>git version // check and verify"
+            }
+            
+        ]    
     }
     
 ]
