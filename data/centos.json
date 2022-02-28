@@ -7,5 +7,18 @@
                 "cmd" : "dnf module install nodejs:<stream><br>dnf module list nodejs<br>dnf module install nodejs:12"
             }
         ]    
+    },{
+        "name" : "LAMP",
+        "versions" : [
+            {
+                "version" : "Cent Os 8",
+                "cmd" : "sudo dnf install httpd // install httpd<br>sudo systemctl start httpd //start httpd<br>sudo firewall-cmd --permanent --add-service=http // allow firewall<br>sudo firewall-cmd --permanent --list-all // check firewall<br>sudo firewall-cmd --reload //reload firewall<br>sudo dnf install mariadb-server //Installing MariaDB<br>sudo systemctl start mariadb //start MariaDB<br>sudo mysql_secure_installation // set user and password<br>sudo mysql // login to database<br>exit //exit from database<br>sudo dnf install php php-mysqlnd //Installing PHP<br>sudo systemctl restart httpd // restart httpd"
+            },
+            {
+                "version" : "Cent Os 7",
+                "cmd" : "sudo yum install httpd // install httpd<br>sudo systemctl enable httpd.service //enable httpd<<br>sudo yum install mariadb-server mariadb //Installing MariaDB<br>sudo systemctl start mariadb //start MariaDB<br>sudo mysql_secure_installation // set user and password<br>sudo mysql // login to database<br>exit //exit from database<br>sudo yum install php php-mysql //Installing PHP"
+            }
+        ]    
     }
+    
 ]
