@@ -6,6 +6,10 @@ app.config(function($routeProvider) {
       templateUrl : "./src/views/home.html",
       controller: "homeCtrl"
     })
+    .when("/genrate", {
+        templateUrl : "./src/views/genrate.html",
+        controller: "genrateCtrl"
+      })
   });
 
 
@@ -51,7 +55,7 @@ app.directive('copyToClipboard', function () {
 });
 
 
-app.controller('homeCtrl',['$scope','$http', function($scope,$http){
+app.controller('homeCtrl',['$scope','$routeParams','$location','$http', function($scope,$routeParams,$location,$http){
 
     $scope.oss = [];
     $scope.os = null;
@@ -61,10 +65,22 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
     $scope.version = null;
     $scope.installData = [];
     $scope.cmdLines = [];
-    
+
     $scope.getOs = ()=>{
         $http.get("./data/os.json").then(function(response) {
             $scope.oss = response.data;
+            if($routeParams){
+                if($routeParams.os != null){
+                    $scope.os = [$routeParams.os];
+                }
+                if($routeParams.module != null){
+                    $scope.module = [$routeParams.module];
+                }
+                if($routeParams.version != null){
+                    $scope.version = [$routeParams.version];
+                }
+            }
+
         });
     },
     $scope.selectOs = () => {
@@ -74,9 +90,11 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
                 file = e.file
                 $http.get("./data/"+file).then(function(response) {
                     $scope.modules = $scope.sortResults(response.data,"name");
-                    // $scope.modules = response.data
-
+                    $scope.installData = [];
+                    $scope.cmdLines = []
+                    $scope.versions = []
                 });
+                // $location.url("/?os="+$scope.os+"&module="+$scope.module+"&version="+$scope.version[0])
             }
         })
     },
@@ -84,8 +102,10 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
         $scope.modules.forEach((e) => {
             if (e.name == $scope.module){
                 $scope.versions = e.versions
-                $scope.version = $scope.versions[0].version
-                $scope.selectVersion()
+                // $scope.version = [$scope.versions[0].version]
+                
+                // $location.url("/?os="+$scope.os+"&module="+$scope.module+"&version="+$scope.version[0])
+                // $scope.selectVersion()
             }
         })
     },
@@ -97,12 +117,41 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
                     if(e.version == $scope.version){
                         $scope.installData = e;
                         $scope.cmdLines = e.cmd.split("<br>")
+                        var url = "/?os="+$scope.os+"&module="+$scope.module+"&version="+e.version
+                        $location.url(url)
                     }
                 })
             }
         })
+        
     }
-    
-
-
 }]);
+
+app.controller('genrateCtrl',['$scope','$http', function($scope, $http) {
+    $scope.links = [];
+    $scope.genrateLinks = () => {
+        $http.get("./data/os.json").then(function(response) {
+            var oss = response.data;
+            oss.forEach((e) => {
+                var os = e.name;
+                $http.get("./data/"+e.file).then(function(response) {
+                    var modules = $scope.sortResults(response.data,"name");
+
+                    modules.forEach((m) => {
+                        var module = m.name;
+                        m.versions.forEach((v) => {
+                            var version = v.version
+                            var link_line = encodeURI(`https://install-packages.github.io/#!/?os=${os}&module=${module}&version=${version}`)
+                            var link = {
+                                'text' : `How to install ${module} ${version} in ${os}`,
+                                'link' : link_line
+                            }
+                            $scope.links.push(link)
+                        })
+                    })
+                });
+            })
+        });
+        console.log($scope.links)
+    }
+}])

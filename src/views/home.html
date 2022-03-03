@@ -3,7 +3,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="os">Select Your OS</label>
-                <select ui-select2 data-placeholder="Select OS" name="os" id="os" ng-model="os" ng-change="selectOs()" class="form-control">
+                <select ui-select2="{allowClear: true}" data-placeholder="Select OS" name="os" id="os" ng-model="os" ng-change="selectOs()" class="form-control">
                     <option value=""></option>
                     <option ng-repeat="os in oss" value="{{ os.name }}">{{ os.name }}</option>
                 </select>
@@ -12,7 +12,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="os">Select Module</label>
-                <select ui-select2 data-placeholder="Select Module" name="modules" id="modules" ng-model="module" ng-change="selectModule()" class="form-control">
+                <select ui-select2="{allowClear: true}" data-placeholder="Select Module" name="modules" id="modules" ng-model="module" ng-change="selectModule()" class="form-control">
                     <option value=""></option>
                     <option ng-repeat="module in modules" value="{{ module.name }}">{{ module.name }}</option>
                 </select>
@@ -21,7 +21,7 @@
         <div class="col-md-4">
             <div class="from-group">
                 <label for="os">Select Version</label>
-                <select ui-select2 data-placeholder="Select Version" name="versions" id="versions" ng-model="version" ng-change="selectVersion()" class="form-control">
+                <select ui-select2="{allowClear: true}" data-placeholder="Select Version" name="versions" id="versions" ng-model="version" ng-change="selectVersion()" class="form-control">
                     <option value=""></option>
                     <option ng-repeat="v in versions" value="{{v.version}}">{{ v.version }}</option>
                 </select>
