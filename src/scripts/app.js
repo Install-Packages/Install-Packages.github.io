@@ -143,7 +143,7 @@ app.controller('genrateCtrl',['$scope','$http', function($scope, $http) {
                             var version = v.version
                             var link_line = encodeURI(`https://install-packages.github.io/#!/?os=${os}&module=${module}&version=${version}`)
                             var link = {
-                                'text' : `How to install ${module} ${version} in ${os}`,
+                                'text' : `How to install ${module} (${version}) in ${os}`,
                                 'link' : link_line
                             }
                             $scope.links.push(link)
